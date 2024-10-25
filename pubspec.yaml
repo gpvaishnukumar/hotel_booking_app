@@ -1,4 +1,4 @@
-name: hotel_booking_app
+name: RentalApp
 description: "A new Flutter project."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -27,4 +27,5 @@ flutter_icons:
 flutter:
   uses-material-design: true
   assets:
+    - assets/images/
     - assets/icons/5-stars.png # Update this if your icon path is different

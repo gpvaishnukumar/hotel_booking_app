@@ -5,21 +5,24 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Container(
       width: double.infinity, // Set width to full screen
       color: Colors.white, // Change container color to white
-      padding: EdgeInsets.all(16.0), // Add padding inside the container
+      padding: EdgeInsets.all(screenWidth * 0.04), // Add padding (4% of screen width)
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Explore the world! By\nTravelling',
             style: TextStyle(
-              fontSize: 24,
+              fontSize: screenWidth * 0.06, // Font size adaptive (6% of screen width)
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16), // Space between text and TextFormField
+          SizedBox(height: screenWidth * 0.04), // Space between text and TextFormField (4% of screen width)
           Row(
             children: [
               Expanded(
@@ -29,11 +32,11 @@ class SearchView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0), // Circular border
                     ),
                     hintText: 'Search Hotels',
-                    contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
+                    contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05), // Adaptive padding
                   ),
                 ),
               ),
-              SizedBox(width: 10), // Gap between TextFormField and filter icon
+              SizedBox(width: screenWidth * 0.02), // Gap between TextFormField and filter icon (2% of screen width)
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),

@@ -11,6 +11,9 @@ class HotelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () {
         Get.to(() => HotelDetailView(hotel: hotel)); // Navigate to HotelDetailView
@@ -30,13 +33,13 @@ class HotelCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10.0), // Rounded corners
                     child: Image.network(
                       hotel.imageUrl,
-                      width: 300,
-                      height: 150,
+                      width: screenWidth * 0.9, // Set width to 90% of screen width
+                      height: screenWidth * 0.5, // Set height to 50% of width for aspect ratio
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
-                          width: 300,
-                          height: 150,
+                          width: screenWidth * 0.9, // Match width
+                          height: screenWidth * 0.5, // Match height
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.0),
                             color: Colors.white,
@@ -64,9 +67,8 @@ class HotelCard extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
-                width: 300,
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -110,11 +112,10 @@ class HotelCard extends StatelessWidget {
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 2),
-                    Text(hotel.location,
-                        style: TextStyle(fontSize: 10),
-                        )
-
-
+                    Text(
+                      hotel.location,
+                      style: TextStyle(fontSize: 10),
+                    ),
                   ],
                 ),
               ),

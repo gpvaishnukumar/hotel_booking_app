@@ -9,6 +9,9 @@ class RecommendedView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -21,18 +24,18 @@ class RecommendedView extends StatelessWidget {
         ),
         SizedBox(height: 16),
         Container(
-          height: 200, // Adjust height as needed
+          height: screenWidth * 0.5, // Set height to 50% of screen width for better aspect ratio
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: bookingController.hotels.length,
             itemBuilder: (context, index) {
               final hotel = bookingController.hotels[index];
-              return GestureDetector( // Wrap with GestureDetector
+              return GestureDetector(
                 onTap: () {
                   Get.to(() => HotelDetailView(hotel: hotel)); // Navigate to HotelDetailView
                 },
                 child: Container(
-                  width: 180, // Adjust width as needed
+                  width: screenWidth * 0.4, // Set width to 40% of screen width
                   margin: EdgeInsets.only(right: 10),
                   child: Stack(
                     children: [
@@ -40,9 +43,18 @@ class RecommendedView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.network(
                           hotel.imageUrl,
-                          height: 200,
-                          width: 180,
+                          height: screenWidth * 0.5, // Match height
+                          width: screenWidth * 0.4, // Match width
                           fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: Colors.grey.shade200,
+                              ),
+                              child: Icon(Icons.broken_image, size: 50),
+                            );
+                          },
                         ),
                       ),
                       Positioned(

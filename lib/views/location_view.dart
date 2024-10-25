@@ -7,6 +7,9 @@ class LocationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the screen width and height
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -17,14 +20,14 @@ class LocationView extends StatelessWidget {
         ),
         SizedBox(height: 16),
         Container(
-          height: 140, // Adjust height as needed
+          height: screenWidth * 0.35, // Set height to 35% of screen width for a better aspect ratio
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: locationController.popularLocations.length,
             itemBuilder: (context, index) {
               final location = locationController.popularLocations[index];
               return Container(
-                width: 150, // Adjust width as needed
+                width: screenWidth * 0.4, // Set width to 40% of screen width
                 margin: EdgeInsets.only(right: 10),
                 child: Stack(
                   children: [
@@ -32,9 +35,18 @@ class LocationView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0),
                       child: Image.network(
                         location.imageUrl,
-                        height: 140,
-                        width: 150,
+                        height: screenWidth * 0.35, // Match height
+                        width: screenWidth * 0.4, // Match width
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.grey.shade200,
+                            ),
+                            child: Icon(Icons.broken_image, size: 50),
+                          );
+                        },
                       ),
                     ),
                     Positioned(

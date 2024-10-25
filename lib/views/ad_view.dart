@@ -5,20 +5,30 @@ class AdView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 150, // Set the same height as hotel card
-      color: Colors.blueGrey, // Set a background color for the ad
-      child: Center(
-        child: Text(
-          'This is an Ad Space',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Get the screen width
+        double screenWidth = constraints.maxWidth;
+
+        // Calculate height based on screen width (for example, 20% of the width)
+        double adHeight = screenWidth * 0.4; // 40% of the width for height
+
+        return Container(
+          width: screenWidth, // Full width of the available space
+          height: adHeight, // Adaptive height
+          color: Colors.blueGrey, // Set a background color for the ad
+          child: Center(
+            child: Text(
+              'This is an Ad Space',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
