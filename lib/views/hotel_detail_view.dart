@@ -11,6 +11,121 @@ class HotelDetailView extends StatelessWidget {
     // Get the screen size
     final screenWidth = MediaQuery.of(context).size.width;
 
+    // Controller for dialog inputs
+    final TextEditingController adultsController = TextEditingController();
+    final TextEditingController childrenController = TextEditingController();
+    final TextEditingController disabledController = TextEditingController();
+    final TextEditingController coupleDaysController = TextEditingController();  // New controller for couple days
+
+    // Show dialog function
+    void showBookingDialog() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Book a Room'),
+            content: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Adults input
+                  Text('Number of Adults'),
+                  TextField(
+                    controller: adultsController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Enter number of adults',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+
+                  // Children input
+                  Text('Number of Children'),
+                  TextField(
+                    controller: childrenController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Enter number of children',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+
+                  // Physically challenged input
+                  Text('Number of Physically Challenged'),
+                  TextField(
+                    controller: disabledController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Enter number of physically challenged guests',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+
+                  // Couple days input (number of days for booking)
+                  Text('Number of Couple Days'),
+                  TextField(
+                    controller: coupleDaysController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Enter number of days for the couple',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  // Close the dialog
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  // Handle booking logic here
+                  int adults = int.tryParse(adultsController.text) ?? 0;
+                  int children = int.tryParse(childrenController.text) ?? 0;
+                  int disabled = int.tryParse(disabledController.text) ?? 0;
+                  int coupleDays = int.tryParse(coupleDaysController.text) ?? 0;
+
+                  // Display a confirmation
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text('Booking Summary'),
+                        content: Text(
+                          'Adults: $adults\nChildren: $children\nPhysically Challenged: $disabled\nCouple Days: $coupleDays',
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              // Close the dialog
+                              Navigator.pop(context);
+                            },
+                            child: Text('OK'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+
+                  // Close the booking dialog
+                  Navigator.pop(context);
+                },
+                child: Text('Confirm'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(hotel.name),
@@ -92,9 +207,7 @@ class HotelDetailView extends StatelessWidget {
             SizedBox(
               width: double.infinity, // Makes the button full width
               child: ElevatedButton(
-                onPressed: () {
-                  // Define your button action here
-                },
+                onPressed: showBookingDialog, // Show booking dialog when pressed
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red, // Background color
                   padding: EdgeInsets.symmetric(vertical: screenWidth * 0.04), // Adaptive padding (4% of screen width)

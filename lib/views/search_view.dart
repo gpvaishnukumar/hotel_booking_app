@@ -32,6 +32,7 @@ class SearchView extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10.0), // Circular border
                     ),
                     hintText: 'Search Hotels',
+                    prefixIcon:Icon(Icons.search),
                     contentPadding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05), // Adaptive padding
                   ),
                 ),
