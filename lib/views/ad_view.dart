@@ -51,25 +51,25 @@ class AdView extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 12), // Space between the text and button
-                    // Button with improved styling
+                    // Button with smaller size and improved styling
                     ElevatedButton(
                       onPressed: () {
                         // Add your action here
                         print("Become a Host button pressed");
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red.shade400, // Light red button color
+                        backgroundColor: Colors.red.shade300, // Light red button color
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0), // Rounded corners
+                          borderRadius: BorderRadius.circular(20.0), // Rounded corners
                         ),
-                        padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 32.0), // More padding
+                        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0), // Reduced padding for smaller button
                         elevation: 5.0, // Add shadow for depth
                       ),
                       child: Text(
                         'Become a Host',
                         style: TextStyle(
                           color: Colors.white, // White text color for the button
-                          fontSize: 18.0, // Larger text size for the button label
+                          fontSize: 14.0, // Slightly smaller text size for the button label
                           fontWeight: FontWeight.bold, // Bold text for emphasis
                         ),
                       ),

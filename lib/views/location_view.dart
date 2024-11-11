@@ -21,13 +21,14 @@ class LocationView extends StatelessWidget {
         SizedBox(height: 16),
         Container(
           height: screenWidth * 0.35, // Set height to 35% of screen width for a better aspect ratio
+
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: locationController.popularLocations.length,
             itemBuilder: (context, index) {
               final location = locationController.popularLocations[index];
               return Container(
-                width: screenWidth * 0.4, // Set width to 40% of screen width
+                width: screenWidth * 0.25, // Set width to 40% of screen width
                 margin: EdgeInsets.only(right: 10),
                 child: Stack(
                   children: [

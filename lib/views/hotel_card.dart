@@ -53,13 +53,15 @@ class HotelCard extends StatelessWidget {
                     top: 8,
                     right: 8,
                     child: CircleAvatar(
-                      backgroundColor: Colors.white,
-                      radius: 20,
+                      backgroundColor: Colors.white, // Transparent background
+                      radius: 22, // Increased radius for a larger circle
                       child: IconButton(
                         icon: Obx(() => Icon(
-                          hotel.isFavorite.value ? Icons.favorite : Icons.favorite_border,
-                          color: hotel.isFavorite.value ? Colors.red : Colors.grey,
-                          size: 18,
+                          Icons.favorite, // Always use the filled heart icon
+                          color: hotel.isFavorite.value
+                              ? Colors.red // Red if it's favorited
+                              : Colors.grey, // Grey if not favorited
+                          size: 25, // Increased icon size
                         )),
                         onPressed: () => onToggleFavorite(),
                       ),
@@ -112,9 +114,10 @@ class HotelCard extends StatelessWidget {
                       style: TextStyle(fontSize: 16),
                     ),
                     SizedBox(height: 2),
+                    // Replaced location with "Private room / 4 beds"
                     Text(
-                      hotel.location,
-                      style: TextStyle(fontSize: 10),
+                      'Private room / 4 beds',
+                      style: TextStyle(fontSize: 12, color: Colors.grey),
                     ),
                   ],
                 ),

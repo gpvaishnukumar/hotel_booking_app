@@ -33,6 +33,7 @@ class HomeView extends StatelessWidget {
                   // Use the LocationView for popular locations
                   LocationView(), // Add the LocationView here
 
+                  SizedBox(height: 16),
                   // Recommended Section (from recommended_view.dart)
                   RecommendedView(), // Add the RecommendedView here
 

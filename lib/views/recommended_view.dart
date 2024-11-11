@@ -67,12 +67,14 @@ class RecommendedView extends StatelessWidget {
                             right: 8,
                             child: CircleAvatar(
                               backgroundColor: Colors.white,
-                              radius: 18,
+                              radius: 22, // Increased radius for larger button
                               child: IconButton(
                                 icon: Obx(() => Icon(
-                                  hotel.isFavorite.value ? Icons.favorite : Icons.favorite_border,
-                                  color: hotel.isFavorite.value ? Colors.red : Colors.grey,
-                                  size: 16,
+                                  Icons.favorite, // Always use the filled heart icon
+                                  color: hotel.isFavorite.value
+                                      ? Colors.red // Red if it's favorited
+                                      : Colors.grey, // Grey if not favorited
+                                  size: 25, // Increased icon size
                                 )),
                                 onPressed: () {
                                   bookingController.toggleFavorite(index);
@@ -84,11 +86,38 @@ class RecommendedView extends StatelessWidget {
                       ),
                       SizedBox(height: 8), // Add some space between image and text
 
+                      // Price per night first with large price and smaller /night
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '\$${hotel.price}', // Price part
+                              style: TextStyle(
+                                fontSize: 18, // Larger font for price
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            TextSpan(
+                              text: ' /Night ⚡', // Smaller /night part
+                              style: TextStyle(
+                                fontSize: 12, // Smaller font for /night
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 4),
+
                       // Hotel name and rating in a row (opposite sides)
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween, // Space between name and rating
+                        mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween, // Space between name and rating
                         children: [
-                          Expanded( // Ensures name takes available space
+                          Expanded(
+                            // Ensures name takes available space
                             child: Text(
                               hotel.name,
                               style: TextStyle(
@@ -99,7 +128,8 @@ class RecommendedView extends StatelessWidget {
                               maxLines: 1, // Limit to 1 line
                             ),
                           ),
-                          Row( // Rating display
+                          Row(
+                            // Rating display
                             children: [
                               Icon(
                                 Icons.star,
@@ -118,15 +148,14 @@ class RecommendedView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(height: 4), // Space between name and room details
 
-                      // Price per night below the name and rating
+                      // New row for "Private room/ 4 beds" text
                       Text(
-                        '\$${hotel.price} /night',
+                        "Private room / 4 beds", // Room details text
                         style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                          fontSize: 14, // Font size for the text
+                          color: Colors.grey, // Grey color for the text
                         ),
                       ),
                     ],
